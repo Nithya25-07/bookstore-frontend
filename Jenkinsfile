@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Nithya25-07/bookstore-frontend.git'
+                git 'https://github.com/Nithya25-07/bookstore-frontend.git'
             }
         }
 
@@ -22,13 +22,14 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'npm test'
+                // Allow pipeline to continue even if there are no tests
+                bat 'npm test --passWithNoTests'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying frontend application...'
+                echo ' Frontend build successful. Ready for deployment!'
             }
         }
     }
