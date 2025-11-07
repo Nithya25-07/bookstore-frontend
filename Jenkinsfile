@@ -1,16 +1,11 @@
 pipeline {
     agent any
 
-    environment {
-        // Specify Node.js if you have one configured in Jenkins (optional)
-        // PATH = "${tool 'NodeJS'}\\bin;${env.PATH}"
-    }
-
     stages {
 
         stage('Checkout') {
             steps {
-                // Checkout the correct main branch
+                // ✅ Checkout main branch from GitHub
                 git branch: 'main',
                     url: 'https://github.com/Nithya25-07/bookstore-frontend.git'
             }
@@ -30,15 +25,15 @@ pipeline {
 
         stage('Test') {
             steps {
-                // Allow pipeline to continue even if there are no tests
+                // Skip test failure if no tests exist
                 bat 'npm test -- --passWithNoTests || exit 0'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deployment stage (you can add deployment commands here later)'
-                // Example (if you use a web server or FTP):
+                echo ' Deployment stage placeholder — add your deployment commands here later'
+                // Example if you want to deploy locally:
                 // bat 'xcopy build "C:\\path\\to\\deploy\\folder" /E /H /C /I /Y'
             }
         }
@@ -46,10 +41,10 @@ pipeline {
 
     post {
         success {
-            echo '🎉 Build completed successfully!'
+            echo ' Build completed successfully!'
         }
         failure {
-            echo '❌ Build failed. Check the console output for details.'
+            echo ' Build failed. Check Jenkins console output for details.'
         }
     }
 }
